@@ -31,6 +31,7 @@ const politicalKeywords = [
   '二极管',
   '小红书',
   '走亲戚',
+  '如何评价',
   '言论自由',
   '责任约束',
   '独立思考',
@@ -68,6 +69,7 @@ const exclusionList = [
   'header',
   'footer',
   'TopicsNode',
+  'Rightbar'
 ];
 
 const allElements = document.querySelectorAll('body *');
