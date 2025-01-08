@@ -1,5 +1,4 @@
 const politicalKeywords = [
-  '巴',
   '华',
   '润',
   '政治',
@@ -80,6 +79,7 @@ allElements.forEach((element) => {
 
   if (politicalKeywordsRegex.test(elementText)) {
     element.classList.add('hidden-content');
+    addHoverEffect(element);
   }
 });
 
@@ -104,7 +104,23 @@ style.innerHTML = `
   .hidden-content {
     color: transparent !important; 
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    cursor: help;
     user-select: none; 
   }
 `;
 document.head.appendChild(style);
+
+function addHoverEffect(element) {
+  let timeoutId = null;
+
+  element.addEventListener('mouseenter', () => {
+    timeoutId = setTimeout(() => {
+      element.classList.remove('hidden-content');
+    }, 2000); 
+  });
+
+  element.addEventListener('mouseleave', () => {
+    clearTimeout(timeoutId);
+    element.classList.add('hidden-content');
+  });
+}
