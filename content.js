@@ -113,14 +113,31 @@ document.head.appendChild(style);
 function addHoverEffect(element) {
   let timeoutId = null;
 
-  element.addEventListener('mouseenter', () => {
+  const onMouseEnter = () => {
     timeoutId = setTimeout(() => {
       element.classList.remove('hidden-content');
-    }, 2000); 
-  });
+    }, 2000);
+  };
 
-  element.addEventListener('mouseleave', () => {
+  const onMouseLeave = () => {
     clearTimeout(timeoutId);
     element.classList.add('hidden-content');
+  };
+
+  element.addEventListener('mouseenter', onMouseEnter);
+  element.addEventListener('mouseleave', onMouseLeave);
+
+  const observer = new MutationObserver(() => {
+    if (!document.body.contains(element)) {
+      element.removeEventListener('mouseenter', onMouseEnter);
+      element.removeEventListener('mouseleave', onMouseLeave);
+      clearTimeout(timeoutId);
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true, 
   });
 }
