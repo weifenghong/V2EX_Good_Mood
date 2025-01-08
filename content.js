@@ -24,6 +24,8 @@ const politicalKeywords = [
   '牛马',
   '刀乐',
   '年味',
+  '国产',
+  '炒作',
   'xhs',
   'GFW',
   '二极管',
